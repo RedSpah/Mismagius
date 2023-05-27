@@ -79,7 +79,10 @@ namespace Mismagius // Note: actual namespace depends on the project name.
                                 
                                 break;
                             case "reset":
-                                Functionality.Reset();
+                                Functionality.Reset(false);
+                                break;
+                            case "restart":
+                                Functionality.RestartServer(false);
                                 break;
                             case "exit":
                                 goodbye = true;
@@ -120,7 +123,10 @@ namespace Mismagius // Note: actual namespace depends on the project name.
 
                         break;
                     case "reset":
-                        Functionality.Reset(false);
+                        Functionality.Reset();
+                        break;
+                    case "restart":
+                        Functionality.RestartServer();
                         break;
                     default:
                         Console.WriteLine(CommandHelpMessage);
@@ -245,7 +251,7 @@ namespace Mismagius // Note: actual namespace depends on the project name.
                 foreach (FileInfo file in new DirectoryInfo(OverridesPath + "/all").GetFiles())
                 {
                     string targetFilePath = Path.Combine(override_dir, file.Name);
-                    file.CopyTo(targetFilePath, true);
+                    if (!File.Exists(targetFilePath)) {file.CopyTo(targetFilePath, true);}
                 }
 
                 string override_filename = override_dir + "/" + league.ToString() + ".json";
@@ -308,7 +314,7 @@ namespace Mismagius // Note: actual namespace depends on the project name.
                     foreach (FileInfo file in dir.GetFiles())
                     {
                         string targetfilepath = Path.Combine(targetdirpath, file.Name);
-                        file.CopyTo(targetfilepath, true);
+                        if (!File.Exists(targetfilepath)) { file.CopyTo(targetfilepath, true); }
                     }
                 }
 
@@ -418,7 +424,7 @@ namespace Mismagius // Note: actual namespace depends on the project name.
             }
             else return true;
         }
-        public static void RestartServer()
+        public static void RestartServer(bool silent = true)
         {
             Process apache_stop = new Process();
             Process apache_start = new Process();
@@ -429,15 +435,19 @@ namespace Mismagius // Note: actual namespace depends on the project name.
                 
                 apache_start.StartInfo.FileName = "../../apache_start.bat";
 
+                if (!silent) { Console.WriteLine("Restarting the local server..."); }
                 apache_stop.Start();
 
                 Thread.Sleep(2000); // Giving the Apache Server time to shut down
 
                 apache_start.Start();
+
+                Thread.Sleep(2000);
+                if (!silent) { Console.WriteLine("Done."); }
             }
             else
             {
-                Console.WriteLine("Restart is only available on Windows.");
+                if (!silent) { Console.WriteLine("Restart is only available on Windows."); }
             }  
         }
     }
