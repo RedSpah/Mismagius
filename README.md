@@ -13,9 +13,11 @@ Instruction guide:
 * 6.) Navigate to `localhost/pvpoke/src` in your browser
 * 7.) You should see a familiar PvPoke page 
 
+
 == INSTALLING MISMAGIUS
 * 1.) Download `Mismagius.exe` (Windows) / `Mismagius` (MacOS) from the latest release from the [Releases page](https://github.com/RedSpah/Mismagius/releases).
 * 2.) Move the downloaded executable to `(XAMPP installation folder)/htdocs/pvpoke`
+
 
 == ADDING A CUSTOM FORMAT WITH MISMAGIUS
 * 1.) Copy the exported format settings from the Custom Ranking page
@@ -26,6 +28,7 @@ Instruction guide:
 * 6.) If on Windows, run `restart`. If on Mac/Linux, you'll have to manually restart the Apache server with XAMPP control panel
 * 7.) Refresh the local PvPoke page and your format should be selectable and rank-able, by default it'll have the open format rankings as placeholder
 * 8.) If you want to update a format, update the contents of `XXX.json`, then run `add XXX` in Mismagius again to update it without discarding the previous rankings / overrides
+
 
 == RUN DEEP SIMS / GENERATE RANKING ==
 * 1.) There's a green wrench widget on the side of offline PvPoke ( https://i.imgur.com/vqukjTR.png )- click on it, and go to the "Ranker"
